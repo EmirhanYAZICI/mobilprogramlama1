@@ -1,5 +1,6 @@
+> **Uyarı:** Bu içerik, SCÜ Şarkışla UBYO Mobil Programlama I dersi kapsamında tamamen eğitim amaçlı çevrilmiş ve derlenmiştir. Orijinal dokümantasyon kaynakları (dart.dev, docs.flutter.dev) kendi orijinal lisanslarına (BSD-3-Clause, CC-BY 4.0) tabidir. Bu çalışmanın hiçbir ticari amacı yoktur.
 
-Dart'ta Eşzamanlılık
+#Dart'ta Eşzamanlılık
 
 Birden fazla işlemci çekirdeğinde paralel kod çalıştırmayı sağlamak için isolate'ları kullanın.
 

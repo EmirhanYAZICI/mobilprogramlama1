@@ -1,4 +1,4 @@
-# Dart İleri Düzey Konuları — Pekiştirme Soruları (Takım 4)
+# Dart İleri Düzey Konuları — Pekiştirme Soruları (Toyscode Takımı)
 
 Bu dokümanda **Eşzamanlılık (Concurrency)**, **Null Güvenliği (Null Safety)**, **Dil Sürümlendirme (Language Versioning)** ve **Dart Anahtar Kelimeleri (Keywords)** konularıyla ilgili 2 çoktan seçmeli (test) ve 2 açık uçlu (yazmalı) pekiştirme sorusu yer almaktadır. Soruların cevapları ve kısa açıklamaları en sonda verilmiştir.
 

@@ -26,7 +26,7 @@ Dart'ta bir değişkenin `null` değer alabileceğini (yani nullable olduğunu) 
 
 ---
 
-## ✍️ Bölüm 2: Kısa Cevaplı / Açık Uçlu Sorular (Yazmalı)
+## ✍️ Bölüm 2: Kısa Cevaplı / Açık Uçlu Sorular 
 
 ### Soru 3 (Isolate ve Bellek Mimarisi)
 Dart dilinde ağır hesaplamaları arka planda çalıştırmayı sağlayan, geleneksel iş parçacıklarının (threads) aksine birbiriyle **bellek paylaşmayan** (her birinin kendi yalıtılmış belleği ve olay döngüsü olan) bağımsız çalışma birimlerine ne ad verilir?

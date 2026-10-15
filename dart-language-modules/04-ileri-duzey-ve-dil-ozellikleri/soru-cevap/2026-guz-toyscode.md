@@ -1,6 +1,6 @@
 # Dart İleri Düzey Konuları — Pekiştirme Soruları (Toyscode Takımı)
 
-Bu dokümanda **Eşzamanlılık (Concurrency)**, **Null Güvenliği (Null Safety)**, **Dil Sürümlendirme (Language Versioning)** ve **Dart Anahtar Kelimeleri (Keywords)** konularıyla ilgili 2 çoktan seçmeli (test) ve 2 açık uçlu (yazmalı) pekiştirme sorusu yer almaktadır. Soruların cevapları ve kısa açıklamaları en sonda verilmiştir.
+Bu dokümanda **Eşzamanlılık (Concurrency)**, **Null Güvenliği (Null Safety)**, **Dil Sürümlendirme (Language Versioning)** ve **Dart Anahtar Kelimeleri (Keywords)** konularıyla ilgili 2 çoktan seçmeli ve 2 açık uçlu pekiştirme sorusu yer almaktadır. Soruların cevapları ve kısa açıklamaları en sonda verilmiştir.
 
 ---
 
@@ -26,7 +26,7 @@ Dart'ta bir değişkenin `null` değer alabileceğini (yani nullable olduğunu) 
 
 ---
 
-## ✍️ Bölüm 2: Kısa Cevaplı / Açık Uçlu Sorular 
+## ✍️ Bölüm 2: Açık Uçlu Sorular 
 
 ### Soru 3 (Isolate ve Bellek Mimarisi)
 Dart dilinde ağır hesaplamaları arka planda çalıştırmayı sağlayan, geleneksel iş parçacıklarının (threads) aksine birbiriyle **bellek paylaşmayan** (her birinin kendi yalıtılmış belleği ve olay döngüsü olan) bağımsız çalışma birimlerine ne ad verilir?

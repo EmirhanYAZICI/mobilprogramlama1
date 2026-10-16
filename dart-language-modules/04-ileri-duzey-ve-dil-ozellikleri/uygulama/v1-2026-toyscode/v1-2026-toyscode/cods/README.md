@@ -1,4 +1,4 @@
-# 📱 Dart Kavramları (Dart Concepts Showcase)
+#  Dart Kavramları (Dart Concepts Showcase)
 
 Flutter ve Dart ekosisteminin en kritik modern programlama kavramlarını pratik, etkileşimli ve görsel bir arayüz üzerinde deneyimleten modern bir Flutter uygulamasıdır.
 
@@ -6,13 +6,13 @@ Bu proje; asenkron programlama, çoklu iş parçacığı (multi-threading), veri
 
 ---
 
-## 🎯 Projenin Amacı
+##  Projenin Amacı
 
 Dart ve Flutter öğrenen ya da bilgilerini tazelemek isteyen geliştiriciler için soyut kavramları (Isolate, Stream, Future, Null Safety) canlı bir mobil arayüz üzerinde test edilebilir hale getirmektir. Kullanıcı, her karta dokunduğunda ilgili kavramın nasıl çalıştığını durum kartı ve arayüz tepkileri üzerinden anlık olarak gözlemleyebilir.
 
 ---
 
-## 🚀 İşlenen Temel Dart Kavramları
+##  İşlenen Temel Dart Kavramları
 
 Uygulamada yer alan 5 ana kavram ve teknik işleyişleri:
 
@@ -26,7 +26,7 @@ Uygulamada yer alan 5 ana kavram ve teknik işleyişleri:
 
 ---
 
-## 🎨 Tasarım & UI Mimarisi
+##  Tasarım & UI Mimarisi
 
 Uygulama, standart materyal tasarımların ötesine geçerek **Neobrutalism** esintili retro-modern bir arayüz stili sunar:
 
@@ -37,7 +37,7 @@ Uygulama, standart materyal tasarımların ötesine geçerek **Neobrutalism** es
 
 ---
 
-## 📂 Proje Yapısı
+##  Proje Yapısı
 
 ```text
 uygulama_dart/
@@ -51,7 +51,7 @@ uygulama_dart/
 
 ---
 
-## 🛠️ Kurulum ve Çalıştırma
+## Kurulum ve Çalıştırma
 
 Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
 
@@ -80,7 +80,7 @@ flutter test
 
 ---
 
-## 💡 Hızlı İpuçları & Gözlemler
+## Hızlı İpuçları & Gözlemler
 
 - **Ekran Donmasını Test Edin:** `Ağır Hesap` (Isolate) butonuna bastığınızda progress bar'ın akmaya devam ettiğini ve butonların tıklanabilir kaldığını göreceksiniz. Isolate olmasaydı arayüz tamamen kilitlenirdi.
 - **Paralel Süre Tasarrufu:** `Paralel Yükle` kartına tıkladığınızda geçen milisaniye süresi ekrana yazılır; 3 adet 1 saniyelik işlemin tek seferde ~1 saniyede tamamlandığına şahit olabilirsiniz.

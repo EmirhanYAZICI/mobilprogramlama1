@@ -6,7 +6,7 @@
 
 Bu belge, [dart.dev](https://dart.dev/language) dokümantasyonunun ilgili bölümlerinin Türkçe çevirisidir.
 
-## İçindekiler
+## İçindekiler:
 
 - **Eşzamanlılık** (Concurrency)
   - Eşzamanlılık

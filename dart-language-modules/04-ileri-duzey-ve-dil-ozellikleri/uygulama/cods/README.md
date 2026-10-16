@@ -1,128 +1,86 @@
-# Dart Konu Örnek Uygulaması
+# 📱 Dart Kavramları (Dart Concepts Showcase)
 
-Bu klasör, verilen resmî Dart doküman sayfalarındaki konuları öğreten bir
-örnek uygulama içerir. Her konu başlığına göre ayrı bir klasör oluşturulmuş
-ve ilgili sayfadaki Dart kod örnekleri sırasıyla bu klasörlere
-yerleştirilmiştir. Ana uygulama ise bu klasörlerden bağımsız olarak kökteki
-`main.dart` dosyasıdır.
+Flutter ve Dart ekosisteminin en kritik modern programlama kavramlarını pratik, etkileşimli ve görsel bir arayüz üzerinde deneyimleten modern bir Flutter uygulamasıdır.
 
-Dosya adlandırması **`NN-kisa-aciklama.dart`** biçimindedir; örneğin
-`concurrency/01-event-loop-dongusu.dart`. Baştaki `NN` numarası kodun sayfada
-geçtiği sırayı, sonrasındaki kısa açıklama ise kodun ne yaptığını belirtir.
+Bu proje; asenkron programlama, çoklu iş parçacığı (multi-threading), veri akışları ve tip güvenliği gibi temel Dart yeteneklerini hem görsel geri bildirimlerle hem de gerçek kod mantıklarıyla somutlaştırmaktadır.
 
-## Klasör Yapısı
+---
 
-| Klasör | Kaynak sayfa | İçerik |
-|--------|--------------|--------|
-| `concurrency/` | dart.dev/language/concurrency | Event loop, Future, Stream, async-await, Isolate örnekleri |
-| `async/` | dart.dev/language/async | `async`, `await`, `Future`, `await for` örnekleri |
-| `isolates/` | dart.dev/language/isolates | `Isolate.run`, closure, `ReceivePort`/`SendPort`, uzun ömürlü işçi izoleleri |
-| `null-safety/` | dart.dev/null-safety | Sound null safety girişi, non-nullable / nullable örnekler |
-| `understanding-null-safety/` | dart.dev/null-safety/understanding-null-safety | Null safety'nin derinlemesine açıklaması ve 50 kod örneği |
-| `keywords/` | dart.dev/language/keywords | Rezerve edilmiş anahtar kelimelerin listesi (bu sayfada çalıştırılabilir kod bloğu yer almaz) |
-| `versioning/` | dart.dev/language/versioning | Dil sürümü (language versioning) yorumu örnekleri |
-| `main.dart` | — | Tüm konuları birleştiren örnek uygulama |
+## 🎯 Projenin Amacı
 
-> Not: Her klasördeki `NN-kisa-aciklama.dart` dosyaları, ilgili sayfada geçen
-> kod bloklarının belge içindeki sırasına göre adlandırılmıştır.
-> Bazı dosyalar yalnızca bir fonksiyon parçası veya söz dizimi şablonu
-> içerir; bu nedenle tek başına her zaman çalıştırılabilir olmayabilir.
-> Amaç, dokümandaki örneği birebir göstermektir.
+Dart ve Flutter öğrenen ya da bilgilerini tazelemek isteyen geliştiriciler için soyut kavramları (Isolate, Stream, Future, Null Safety) canlı bir mobil arayüz üzerinde test edilebilir hale getirmektir. Kullanıcı, her karta dokunduğunda ilgili kavramın nasıl çalıştığını durum kartı ve arayüz tepkileri üzerinden anlık olarak gözlemleyebilir.
 
-## Ana Uygulama: `main.dart`
+---
 
-`main.dart`, yukarıdaki konuların tamamını tek bir çalıştırılabilir demo
-halinde birleştirir. Programı çalıştırdığınızda dört bölüm sırayla işlenir:
+## 🚀 İşlenen Temel Dart Kavramları
 
-### 1) Future / async-await
-`fetchUserName(id)` fonksiyonu 300 ms gecikmeyle bir kullanıcı adı
-döndüren bir `Future<String>` üretir.
-- `await fetchUserName(1)` ve `await fetchUserName(2)` çağrıları **sıralı**
-  olarak beklenir.
-- `Future.wait([...])` ise birden çok Future'ı **eş zamanlı** bekler.
+Uygulamada yer alan 5 ana kavram ve teknik işleyişleri:
 
-Amaç: `async`/`await` sözdiziminin ve `Future`'ların temel kullanımını
-göstermek.
+| Kavram | Dart Mekanizması | Uygulamadaki İşlevi |
+| :--- | :--- | :--- |
+| **Veri Çek** | `async / await` & `Future` | 1 saniyelik ağ gecikmesi simülasyonu ile asenkron veri çeker ve arayüzü kitlemeden sonucu durum kartına yansıtır. |
+| **Canlı Sayaç** | `Stream` & `StreamBuilder` | `Stream.periodic` kullanarak her saniye yeni bir değer üreten bir veri akışı başlatır ve UI'ı reaktif olarak günceller. |
+| **Ağır Hesap** | `Isolate` (`Isolate.run`) | Yoğun CPU tüketen `Fibonacci(35)` işlemini ayrı bir arka plan iş parçacığına taşır; böylece ana UI thread (Event Loop) donmaz. |
+| **Görev Ekle** | Sound `Null Safety` | Nullable değişkenler (`String?`) ve null-coalescing (`??`) operatörünün varsayılan değer atama mantığını gösterir. |
+| **Paralel Yükle** | `Future.wait` | 3 ayrı asenkron işlemi sıralı (~3000 ms) bekletmek yerine eş zamanlı/paralel koşturarak toplam süreyi ~1000 ms seviyesine indirir. |
 
-### 2) Stream / await-for
-`taskIdStream(count)` fonksiyonu `async*` + `yield` kullanarak her 100 ms'de
-bir artan bir `int` değeri yayınlar. `main` içindeki `await for` döngüsü bu
-stream'i dinler ve her değer için bir `Task` nesnesi oluşturur.
-Bu bölümde ayrıca `late` ve null-aware (`??=`, `!`) kullanımları gösterilir.
+---
 
-### 3) Null safety
-`Task` sınıfı üzerinden null safety kavramları gösterilir:
-- `title` ve `id` **non-nullable**'dır (asla null olamaz).
-- `assignee` **nullable**'dır (`String?`).
-- `assignee ?? 'atanmadı'` → null ise varsayılan değer (`??`).
-- `assignee!.toUpperCase()` → değerin null olmadığını bildirme (`!`).
-- `isAssigned` → `assignee != null` kontrolü (null-check promotion).
+## 🎨 Tasarım & UI Mimarisi
 
-### 4) Isolate (arka plan işçisi)
-`slowFib(n)` bilerek yavaş, özyineli (recursive) bir Fibonacci hesabıdır.
-`computeFib(n)` bunu `Isolate.run(...)` ile **ayrı bir izolede** çalıştırır,
-böylece ağır hesap ana izolenin event loop'unu kilitlemez. Program bu sonucu
-beklerken ana izol serbest kaldığı için diğer olayları işleyebilir.
+Uygulama, standart materyal tasarımların ötesine geçerek **Neobrutalism** esintili retro-modern bir arayüz stili sunar:
 
-## Nasıl Çalıştırılır?
+- **Özgün Renk Paleti:** Krem/bej zemin (`#F4EFE1`), sıcak açık kartlar (`#FBF8EF`) ve canlı vurgu renkleri (Sarı, Turuncu, Yeşil, Teal).
+- **Yüksek Kontrastlı Hatlar:** Neobrutalism çizgisine uygun 2px kalınlığında koyu çerçeveler (`#22211E`) ve yuvarlatılmış köşeler.
+- **Dinamik Durum Kartı:** İşlemler sürerken gösterilen `LinearProgressIndicator`, renkli durum etiketleri ve canlı Stream sayaç alanı.
+- **Özel Alt Gezinme Menüsü:** Sayfa akışını ve hızlı Isolate çalıştırma aksiyonunu sağlayan şık bir bottom bar.
 
-Bu depo için [Dart SDK](https://dart.dev/get-dart) (3.x) kurulu olmalıdır.
-Kök dizinde aşağıdaki komutu çalıştırın:
+---
 
+## 📂 Proje Yapısı
+
+```text
+uygulama_dart/
+├── lib/
+│   └── main.dart            # Tüm UI bileşenleri, durum yönetimi ve Dart kavramlarının mantığı
+├── test/
+│   └── widget_test.dart     # Uygulamanın başarıyla derlendiğini ve temel bileşenleri doğrulayan testler
+├── pubspec.yaml             # Proje bağımlılıkları ve meta bilgileri
+└── README.md                # Proje dokümantasyonu
+```
+
+---
+
+## 🛠️ Kurulum ve Çalıştırma
+
+Projeyi yerel ortamınızda çalıştırmak için aşağıdaki adımları izleyebilirsiniz:
+
+### 1. Ön Gereksinimler
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (Sürüm: `3.0.0` veya üzeri)
+- Dart SDK (`>=3.0.0 <4.0.0`)
+- Android Studio / VS Code (Flutter eklentileriyle) veya bir emülatör / fiziksel cihaz
+
+### 2. Bağımlılıkları Yükleme
+Terminalde proje ana dizinine giderek:
 ```bash
-dart run main.dart
+flutter pub get
 ```
 
-Beklenen çıktı (kısa özet):
-
-```
-=== Dart Konu Demo Başladı ===
-
-[1] Future / async-await örneği
-   Çekilen kullanıcılar: kullanici_1, kullanici_2
-   Paralel çekilenler: [kullanici_3, kullanici_4]
-
-[2] Stream / await-for örneği
-   Yeni görev geldi -> Görev 1 (atanan: atanmadı)
-   ... (Görev 5'e kadar)
-   Toplam 5 görev işlendi. İlk görev: Görev 1
-   Özet: Stream toplam 5 görev üretti.
-
-[3] Null safety örneği
-   Atanmamış görev: atandı mı? false (atanan: atanmadı)
-   Atanmış görev: atandı mı? true (büyük harf: AYŞE)
-
-[4] Isolate örneği (arka plan işçisi)
-   slowFib(35) = 14930352 (arka planda hesaplandı, ... ms)
-   Ana izol bu süre boyunca serbest kaldı.
-
-=== Demo Tamamlandı ===
+### 3. Uygulamayı Başlatma
+Cihazınızı veya emülatörünüzü bağladıktan sonra:
+```bash
+flutter run
 ```
 
-> Not: `slowFib(35)` sonucu `14930352` olup yukarıdaki `concurrency/` ve
-> `main.dart` içindeki tanıma göre `n <= 1 ? 1 : ...` biçiminde hesaplanır.
+### 4. Testleri Koşturma
+Mevcut widget testlerini doğrulamak için:
+```bash
+flutter test
+```
 
-## Kavram → Kod Eşlemesi
+---
 
-| Kavram | Ana uygulamadaki karşılığı |
-|--------|----------------------------|
-| `Future` | `fetchUserName` |
-| `async` / `await` | `fetchUserName`, `main`, `await for` |
-| `Future.wait` | Eş zamanlı kullanıcı çekme |
-| `Stream` / `async*` / `yield` | `taskIdStream` |
-| `await for` | `taskIdStream` dinleme döngüsü |
-| Null safety (`?`, `!`, `??`, promotion) | `Task` sınıfı ve bölüm 3 |
-| `late` | `summary` değişkeni |
-| Isolate (arka plan) | `computeFib` / `Isolate.run` |
-| Language versioning | `main.dart` başındaki `// @dart = 3.4` |
+## 💡 Hızlı İpuçları & Gözlemler
 
-## Önemli Notlar / Sınırlamalar
-
-- Ana uygulama sadece Dart'ın yerel (native) platformda `Isolate.run`
-  kullandığı için **Dart Native (CLI)** üzerinde çalıştırılmalıdır. Dart Web
-  platformunda izole desteği farklıdır.
-- Klasörlerdeki örnek dosyalar belgelerden birebir alınmıştır; bazıları
-  eksik bağlam (örn. sadece bir fonksiyon gövdesi) içerir ve tek başına
-  derlenmeyebilir. Bunlar referans amaçlıdır.
-- `dart` komutu bu makinede kurulu değilse, önce
-  <https://dart.dev/get-dart> adresinden SDK'yı kurun.
+- **Ekran Donmasını Test Edin:** `Ağır Hesap` (Isolate) butonuna bastığınızda progress bar'ın akmaya devam ettiğini ve butonların tıklanabilir kaldığını göreceksiniz. Isolate olmasaydı arayüz tamamen kilitlenirdi.
+- **Paralel Süre Tasarrufu:** `Paralel Yükle` kartına tıkladığınızda geçen milisaniye süresi ekrana yazılır; 3 adet 1 saniyelik işlemin tek seferde ~1 saniyede tamamlandığına şahit olabilirsiniz.

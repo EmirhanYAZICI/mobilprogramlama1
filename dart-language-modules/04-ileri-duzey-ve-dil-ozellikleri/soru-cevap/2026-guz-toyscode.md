@@ -1,43 +1,43 @@
 # Dart İleri Düzey Konuları — Pekiştirme Soruları (Toyscode Takımı)
 
-Bu dokümanda **Eşzamanlılık (Concurrency)**, **Null Güvenliği (Null Safety)**, **Dil Sürümlendirme (Language Versioning)** ve **Dart Anahtar Kelimeleri (Keywords)** konularıyla ilgili 2 çoktan seçmeli ve 2 açık uçlu pekiştirme sorusu yer almaktadır. Soruların cevapları ve kısa açıklamaları en sonda verilmiştir.
+Bu dokümanda **Eşzamanlılık (Concurrency)**, **Null Güvenliği (Null Safety)**, **Isolate Mimarisi** ve **Dart 3 Sınıf Belirleyicileri (Modifiers)** konularıyla ilgili, orta-ileri seviye 2 çoktan seçmeli ve 2 açık uçlu pekiştirme sorusu yer almaktadır. Soruların cevapları ve teknik açıklamaları belgenin sonunda verilmiştir.
 
 ---
 
 ## 📝 Bölüm 1: Çoktan Seçmeli Sorular (Test)
 
-### Soru 1 (Eşzamanlılık / Concurrency)
-Dart dilinde asenkron olarak çalışacak bir fonksiyonu bildirmek ve içinde `await` ifadesini kullanabilmek için fonksiyon gövdesinin hemen önüne hangi anahtar kelime yazılır?
+### Soru 1 (Eşzamanlılık / Asenkron Üreteçler)
+Dart dilinde, zaman içinde asenkron olarak birden fazla değer üreten (yani `Stream` dönen) bir üreteç (generator) fonksiyonu tanımlamak için fonksiyon gövdesinin hemen önüne hangi anahtar kelime yazılır?
 
-- **A)** `sync`
-- **B)** `isolate`
-- **C)** `async`
-- **D)** `future`
+- **A)** `async`
+- **B)** `async*`
+- **C)** `sync*`
+- **D)** `yield*`
 
 ---
 
-### Soru 2 (Null Güvenliği / Null Safety)
-Dart'ta bir değişkenin `null` değer alabileceğini (yani nullable olduğunu) derleyiciye belirtmek için tür adının sonuna hangi işaret konur? (Örn: `String... ad;`)
+### Soru 2 (Null Güvenliği / Lazy Initialization)
+Dart'ta null güvenliği (null safety) bağlamında; değeri sonradan atanacak olan, atama yapılmadan kullanıldığında derleme zamanı (compile-time) yerine çalışma zamanı (runtime) hatası fırlatan ve **aynı zamanda bellekteki başlatma işlemi değişkene ilk erişilene kadar ertelenen (lazy initialization)** değişkenleri tanımlamak için hangi anahtar kelime kullanılır?
 
-- **A)** `!` *(Ünlem işareti)*
-- **B)** `?` *(Soru işareti)*
-- **C)** `#` *(Kare işareti)*
-- **D)** `*` *(Yıldız işareti)*
+- **A)** `deferred`
+- **B)** `lazy`
+- **C)** `final`
+- **D)** `late`
 
 ---
 
 ## ✍️ Bölüm 2: Açık Uçlu Sorular 
 
-### Soru 3 (Isolate ve Bellek Mimarisi)
-Dart dilinde ağır hesaplamaları arka planda çalıştırmayı sağlayan, geleneksel iş parçacıklarının (threads) aksine birbiriyle **bellek paylaşmayan** (her birinin kendi yalıtılmış belleği ve olay döngüsü olan) bağımsız çalışma birimlerine ne ad verilir?
+### Soru 3 (Isolate ve Otomatik Yönetim)
+Dart'ta geleneksel iş parçacıklarının (threads) aksine bellek paylaşmayan Isolate'ler, eski sürümlerde manuel port (`SendPort`/`ReceivePort`) yönetimi gerektiriyordu. Dart 2.15 ile standart kütüphaneye eklenen; arka planda kısa ömürlü bir Isolate oluşturup, ağır hesaplamayı yapıp sonucu ana thread'e döndürdükten sonra Isolate'i **otomatik olarak sonlandıran (kill)** yüksek seviyeli asenkron metodun adı nedir?
 
 **Cevap:**  
 > *(Öğrencinin yazacağı yer)*
 
 ---
 
-### Soru 4 (Dil Sürümlendirme / Language Versioning)
-Bir Dart dosyasının, projedeki diğer dosyalardan farklı olarak belirli bir Dart sürümüyle (örneğin Dart 2.17) derlenmesini sağlamak için dosyanın en başında kullanılan tek satırlık yorum yönergesi nasıl yazılır?
+### Soru 4 (Dart 3 Sınıf Belirleyicileri / Modifiers)
+Dart 3 ile birlikte dilin nesne yönelimli yapısına yeni erişim belirleyiciler eklenmiştir. Bir sınıfın hiyerarşisini kısıtlayarak, o sınıftan türetilecek alt sınıfların (subclasses) **yalnızca aynı dosya (library) içerisinde** tanımlanmasını zorunlu kılan ve `switch` ifadelerinde derleyicinin tüm alt sınıfları kontrol etmesini (exhaustiveness) sağlayan anahtar kelime nedir?
 
 **Cevap:**  
 > *(Öğrencinin yazacağı yer)*
@@ -45,19 +45,21 @@ Bir Dart dosyasının, projedeki diğer dosyalardan farklı olarak belirli bir D
 ---
 
 <br>
+<br>
+<br>
 
 ---
 
-## 🔑 Cevap Anahtarı ve Açıklamalar
+## 🔑 Cevap Anahtarı ve Kapsamlı Açıklamalar
 
-### Soru 1'in Cevabı: **C) async**
-- **Açıklama:** Dart'ta bir fonksiyonun içerisinde asenkron işlemler yapabilmek ve `await` anahtar sözcüğü ile bir `Future` sonucunu bekleyebilmek için ilgili fonksiyonun tanımına `async` eklenir (Örnek: `Future<void> veriGetir() async { ... }`).
+### Soru 1'in Cevabı: **B) async\***
+- **Açıklama:** Dart'ta tek bir asenkron değer döneceksek (Future) `async` kullanırız. Ancak bir fonksiyon belirli aralıklarla birden çok değer üretecekse (Stream dönüyorsa), bu bir asenkron üreteçtir ve `async*` anahtar kelimesi ile işaretlenir. Bu fonksiyonların içinde değerleri dışarı aktarmak için `yield` anahtar kelimesi kullanılır. (`sync*` senkron iteratörler, `yield*` ise başka bir üreteci delege etmek için kullanılır.)
 
-### Soru 2'nin Cevabı: **B) ? (Soru işareti)**
-- **Açıklama:** Sesli Null Güvenliği (Sound Null Safety) kuralına göre Dart'ta tüm türler varsayılan olarak non-nullable'dır (null değer kabul etmez). Bir değişkenin null değer tutmasına izin vermek için türünün sonuna `?` eklenir (Örnek: `String? isim;`). `!` işareti ise tam tersine, nullable bir değerin o an kesinlikle null olmadığını iddia etmek (null assertion) için kullanılır.
+### Soru 2'nin Cevabı: **D) late**
+- **Açıklama:** `late` anahtar kelimesi derleyiciye şu iki şeyi söyler: 1) "Bu değişkeni nullable (`?`) yapma, ben ona kullanmadan önce kesinlikle bir değer atayacağım." (Eğer atamazsanız kod derlenir ancak çalışırken `LateInitializationError` fırlatır). 2) "Bu değişkenin değerini (özellikle maliyetli bir fonksiyon içeriyorsa) bellekte hemen oluşturma, sadece kod içinde ilk çağrıldığı/okunduğu anda oluştur (lazy evaluation)."
 
-### Soru 3'ün Cevabı: **Isolate (veya İzole)**
-- **Açıklama:** Dart'ta çok çekirdekli paralellik "Isolate" (İzole) yapısıyla sağlanır. Isolate'lar geleneksel thread'ler gibi belleği paylaşmazlar (`shared-nothing`). Bu sayede veri yarışması (race condition) ve kilitlenme (deadlock) riskleri ortadan kalkar; aralarında yalnızca portlar (`SendPort` / `ReceivePort`) aracılığıyla mesajlaşırlar.
+### Soru 3'ün Cevabı: **`Isolate.run()`**
+- **Açıklama:** Eskiden Isolate oluşturmak için `Isolate.spawn()` kullanır ve iletişim için manuel portlar kurardık. Dart 2.15 ile gelen `Isolate.run()`, arka planda hızlıca bir Isolate açar, içine verilen fonksiyonu (closure) çalıştırır, dönüş değerini ana Isolate'e güvenli bir şekilde aktarır ve işlemi bitince kendi kendini kapatır. Ağır JSON parse işlemleri veya büyük matematiksel hesaplamalar için en modern ve kolay yöntemdir.
 
-### Soru 4'ün Cevabı: **`// @dart = 2.17` (veya `// @dart = <major>.<minor>`)**
-- **Açıklama:** Dart'ta kütüphane veya dosya bazında dil sürümünü geçersiz kılmak için dosyanın en başında `// @dart = <major>.<minor>` formatında bir yorum satırı kullanılır. Örneğin Dart 2.17 sürümünü zorlamak için `// @dart = 2.17` yazılır.
+### Soru 4'ün Cevabı: **`sealed`**
+- **Açıklama:** Dart 3'ün en güçlü özelliklerinden biri olan `sealed` class'lar, exhaustiveness (kapsamlılık) kontrolü sağlar. Bir sınıfı `sealed class Ortak{}` olarak tanımladığınızda, bu sınıf dışarıdan extend, implement veya mixin olarak kullanılamaz. Alt sınıflar sadece o sınıfın bulunduğu aynı dosyada oluşturulabilir. Böylece derleyici, bu sınıftan türetilen tüm alt sınıfları bilir ve bir `switch` bloğunda tüm ihtimalleri yönetip yönetmediğinizi size derleme anında bildirir.
